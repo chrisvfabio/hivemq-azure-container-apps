@@ -220,3 +220,11 @@ rm ./hivemq-file-rbac-extension.zip
 ```
 
 Refer to [hivemq/hivemq-file-rbac-extension](https://github.com/hivemq/hivemq-file-rbac-extension) for more information.
+
+## Clean up
+
+Delete the resource group to clean up the resources.
+
+```bash
+az group delete --name $RESOURCE_GROUP --yes --no-wait
+```

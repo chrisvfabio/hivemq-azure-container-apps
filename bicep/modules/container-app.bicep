@@ -26,20 +26,20 @@ resource app 'Microsoft.App/containerApps@2023-05-01' = {
         {
           name: name
           image: '${imageUri}:${imageTag}'
-          resources: {
-            cpu: json('0.5')
-            memory: '250Mb'
-          }
+          // resources: {
+          //   cpu: json('0.5')
+          //   memory: '250Mb'
+          // }
         }
       ]
     }
     configuration: {
-      registries: [
-        {
-          server: acrServer
-          identity: acrIdentityResource.id
-        }
-      ]
+      // registries: [
+      //   {
+      //     server: acrServer
+      //     identity: 'system'
+      //   }
+      // ]
       ingress: {
         targetPort: 1883
         exposedPort: 1883

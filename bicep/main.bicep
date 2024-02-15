@@ -13,7 +13,7 @@ resource rg 'Microsoft.Resources/resourceGroups@2023-07-01' = {
 }
 
 // Create a virtual network + subnet
-module network 'network.bicep' = {
+module network 'modules/network.bicep' = {
     name: 'network'
     scope: rg
     params: {
@@ -26,7 +26,7 @@ module network 'network.bicep' = {
 }
 
 // Create a container registry
-module registry 'container-registry.bicep' = {
+module registry 'modules/container-registry.bicep' = {
     name: 'container-registry'
     scope: rg
     params: {
@@ -36,7 +36,7 @@ module registry 'container-registry.bicep' = {
 }
 
 // Create Azure Container App Environment
-module containerAppEnvironment 'environment.bicep' = {
+module containerAppEnvironment 'modules/container-environment.bicep' = {
     name: 'container-app-environment'
     scope: rg
     params: {
@@ -46,23 +46,23 @@ module containerAppEnvironment 'environment.bicep' = {
     }
 }
 
-module hiveApp 'container-app.bicep' = {
-    name: 'hive-app'
-    scope: rg
-    params: {
-        name: 'hive-app'
-        location: rg.location
-        acrIdentityResource: registry.outputs.identity
-        acrServer: registry.outputs.serverUrl
-        appEnvironment: containerAppEnvironment.outputs.environment
-        imageUri: '${registry.outputs.serverUrl}/hivemq-ce-rbac'
-        imageTag: 'latest'
-        ipRestrictions: [
-            {
-                name: 'Personal'
-                ipAddressRange: ''
-                action: 'Allow'
-            }
-        ]
-    }
-}
+// module hiveApp 'container-app.bicep' = {
+//     name: 'hive-app'
+//     scope: rg
+//     params: {
+//         name: 'hive-app'
+//         location: rg.location
+//         acrIdentityResource: registry.outputs.identity
+//         acrServer: registry.outputs.serverUrl
+//         appEnvironment: containerAppEnvironment.outputs.environment
+//         imageUri: '${registry.outputs.serverUrl}/hivemq-ce-rbac'
+//         imageTag: 'latest'
+//         ipRestrictions: [
+//             {
+//                 name: 'Personal'
+//                 ipAddressRange: '193.37.32.112/16'
+//                 action: 'Allow'
+//             }
+//         ]
+//     }
+// }
