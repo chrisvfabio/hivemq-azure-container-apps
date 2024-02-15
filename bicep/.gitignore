@@ -1,0 +1,4 @@
+# Generated ARM Templates, handled by CI
+*.json
+
+!bicepconfig.json

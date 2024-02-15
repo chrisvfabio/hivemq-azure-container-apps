@@ -107,18 +107,17 @@ az network vnet subnet create \
   --resource-group $RESOURCE_GROUP \
   --vnet-name $VNET_NAME \
   --name $SNET_NAME \
-  --address-prefixes 10.0.0.0/21 \
-  --delegation "Microsoft.App/environments"
+  --address-prefixes 10.0.0.0/21
 ```
 
-<!-- Delegate the subnet to the Azure Container Apps environment to allow it to deploy resources in the subnet.
+Delegate the subnet to the Azure Container Apps environment to allow it to deploy resources in the subnet.
 ```bash
 az network vnet subnet update \
     --name $SNET_NAME \
     --vnet-name $VNET_NAME \
     --resource-group $RESOURCE_GROUP \
     --delegations Microsoft.App/environments
-``` -->
+```
 
 Get the resource ID of the subnet to be used by the Azure Container Apps environment.
 
